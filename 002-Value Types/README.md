@@ -19,17 +19,29 @@ When they are used as function arguments or variable assignments, their values a
 
 ## Tasks
 
-1. Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
+### Task1
 
-2. Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
+Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
 
-3. Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
+### Task2
 
-4. Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
+Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
 
-5. Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
+### Task3
 
-6. Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
+Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
+
+### Task4
+
+Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
+
+### Task5
+
+Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
+
+### Task6
+
+Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
 
 ## Tests
 

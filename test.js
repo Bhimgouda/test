@@ -66,20 +66,16 @@ const test = async () => {
       solutionCode: "",
     };
     let currentSection = "";
-
-    currentSection = "";
+    let taskNumber = 0;
+    let codeStarted = true;
 
     lines.forEach((line, index) => {
-      // Remove leading and trailing whitespaces
-      line = line.trim();
-
+      line = line.replace(/"/g, "'");
       if (line.startsWith("# ")) {
         jsonData["title"] = line.slice(2);
       }
 
-      if (line.startsWith("## tasks")) {
-        currentSection = "tasks";
-      } else if (line.startsWith("## Description")) {
+      if (line.startsWith("## Description")) {
         currentSection = "description";
         let description = "";
         const newLines = lines.slice(index + 1);
@@ -91,15 +87,34 @@ const test = async () => {
 
         description = marked.parse(description).replaceAll("\n", "");
         jsonData["description"] = description;
+      } else if (line.startsWith("## tasks")) {
+        currentSection = "tasks";
+        taskNumber = 0;
       } else if (line.startsWith("## Start Code")) {
         currentSection = "startCode";
       } else if (line.startsWith("## Solution Code")) {
         currentSection = "solutionCode";
       } else if (line.startsWith("## Tests")) {
-        currentSection = "solutionCode";
+        currentSection = "tests";
+        taskNumber = 0;
       } else if (line.startsWith("## Extra Details")) {
         currentSection = "extras";
       } else {
+        if (currentSection === "tasks") {
+        }
+
+        // if (currentSection === "tests") {
+        //   if (line.startsWith("```") && !codeStarted) {
+        //     codeStarted = true;
+        //   } else if (line.startsWith("```") && codeStarted) {
+        //     codeStarted = false;
+        //     taskNumber += 1;
+        //   } else {
+        //     console.log(line);
+        //     jsonData["tasks"][taskNumber].test += line;
+        //   }
+        // }
+
         if (
           currentSection === "startCode" ||
           currentSection === "solutionCode"
@@ -111,9 +126,6 @@ const test = async () => {
         }
       }
 
-      jsonData["description"] = marked.parse(jsonData["description"]);
-
-      console.log(jsonData);
       return;
       if (line.startsWith("## ")) {
         // Extract section name
@@ -150,7 +162,7 @@ const test = async () => {
       }
     });
 
-    return jsonData;
+    return console.log(jsonData);
   }
 };
 
