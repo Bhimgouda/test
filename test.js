@@ -52,7 +52,7 @@ const test = async () => {
     "https://raw.githubusercontent.com/bhimgouda/test/main/002-Value%20Types/README.md"
   );
 
-  // console.log(data);
+  console.log(data);
 
   markdownToJson(data);
 
@@ -102,6 +102,7 @@ const test = async () => {
       } else {
         if (currentSection === "tasks") {
           if (parseInt(line[0])) {
+            console.log(line);
           }
         }
 

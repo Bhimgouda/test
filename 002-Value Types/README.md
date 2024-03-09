@@ -20,8 +20,14 @@ When they are used as function arguments or variable assignments, their values a
 ## Tasks
 
 1. Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
-   a. Just for fun
-   b. Just for bun
+
+   - Just for fun
+   - Just for bun
+
+   ```
+   const a = a+b;
+   ```
+
 2. Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
 
 3. Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
