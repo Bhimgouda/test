@@ -67,6 +67,8 @@ const test = async () => {
     };
     let currentSection = "";
 
+    currentSection = "";
+
     lines.forEach((line, index) => {
       // Remove leading and trailing whitespaces
       line = line.trim();
@@ -75,34 +77,15 @@ const test = async () => {
         jsonData["title"] = line.slice(2);
       }
 
-      if (line.startsWith("## Tasks")) {
-        const tasks = [];
-        const newLines = lines.slice(index + 1);
-
-        for (let newLine of newLines) {
-          if (newLine.startsWith("## ")) break;
-          description += newLine + "\n";
-        }
-
-        jsonData["tasks"].push({
-          description: lines[index + 1],
-          test: "",
-        });
+      if (line.startsWith("## tasks")) {
+        currentSection = "tasks";
+      } else if (line.startsWith("## Description")) {
+        currentSection = "description";
+      } else if (line.startsWith("## Start Code")) {
+        currentSection = "startCode";
+      } else if (line.startsWith("## Solution Code")) {
+        currentSection = "solutionCode";
       }
-      if (line.startsWith("## Description")) {
-        let description = "";
-        const newLines = lines.slice(index + 1);
-
-        for (let newLine of newLines) {
-          if (newLine.startsWith("## ")) break;
-          description += newLine + "\n";
-        }
-        // console.log(description);
-
-        description = marked.parse(description).replaceAll("\n", "");
-        jsonData["description"] = description;
-      }
-      console.log(jsonData);
 
       return;
       if (line.startsWith("## ")) {
