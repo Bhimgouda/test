@@ -23,28 +23,6 @@ When they are used as function arguments or variable assignments, their values a
 
 Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
 
-### Task2
-
-Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
-
-### Task3
-
-Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
-
-### Task4
-
-Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
-
-### Task5
-
-Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
-
-### Task6
-
-Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
-
-## Tests
-
 ```javascript
 async (logicDriver, expect) => {
   const justABoolean = await logicDriver.persistentState.get("justABoolean");
@@ -52,12 +30,20 @@ async (logicDriver, expect) => {
 };
 ```
 
+### Task2
+
+Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
+
 ```javascript
 async (logicDriver, expect) => {
     const justAString = await logicDriver.persistentState.get("justAString");
     expect(justAString).to.be.equal("I am a string");
 },
 ```
+
+### Task3
+
+Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
 
 ```javascript
 async (logicDriver, expect) => {
@@ -68,6 +54,10 @@ async (logicDriver, expect) => {
     },
 ```
 
+### Task4
+
+Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
+
 ```javascript
 async (logicDriver, expect) => {
     const bit256Integer = await logicDriver.persistentState.get(
@@ -76,6 +66,10 @@ async (logicDriver, expect) => {
     expect(bit256Integer).to.be.equal(50);
 },
 ```
+
+### Task5
+
+Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
 
 ```javascript
 async (logicDriver, expect) => {
@@ -86,6 +80,10 @@ async (logicDriver, expect) => {
     },
 ```
 
+### Task6
+
+6. Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
+
 ```javascript
 async (logicDriver, expect) => {
       const bit256UnsignedInteger = await logicDriver.persistentState.get(
@@ -94,6 +92,8 @@ async (logicDriver, expect) => {
       expect(bit256UnsignedInteger).to.be.equal(50);
     },
 ```
+
+## Tests
 
 ## Start Code
 
