@@ -123,7 +123,7 @@ endpoint deployer Initialize!():
     mutate 50 -> ValueTypes.State.bit256UnsignedInteger
 ```
 
-### Extra Details
+## Extra Details
 
 - moduleName = ValueTypes
 - deployerEndpoint = Initialize!()

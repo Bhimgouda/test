@@ -81,12 +81,39 @@ const test = async () => {
         currentSection = "tasks";
       } else if (line.startsWith("## Description")) {
         currentSection = "description";
+        let description = "";
+        const newLines = lines.slice(index + 1);
+
+        for (let newLine of newLines) {
+          if (newLine.startsWith("## ")) break;
+          description += newLine + "\n";
+        }
+
+        description = marked.parse(description).replaceAll("\n", "");
+        jsonData["description"] = description;
       } else if (line.startsWith("## Start Code")) {
         currentSection = "startCode";
       } else if (line.startsWith("## Solution Code")) {
         currentSection = "solutionCode";
+      } else if (line.startsWith("## Tests")) {
+        currentSection = "solutionCode";
+      } else if (line.startsWith("## Extra Details")) {
+        currentSection = "extras";
+      } else {
+        if (
+          currentSection === "startCode" ||
+          currentSection === "solutionCode"
+        ) {
+          if (jsonData[currentSection] === "" && !line.startsWith("coco"))
+            return;
+          if (line.startsWith("```")) return;
+          jsonData[currentSection] += line + "\n";
+        }
       }
 
+      jsonData["description"] = marked.parse(jsonData["description"]);
+
+      console.log(jsonData);
       return;
       if (line.startsWith("## ")) {
         // Extract section name
