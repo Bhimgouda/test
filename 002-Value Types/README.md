@@ -125,8 +125,8 @@ endpoint deployer Initialize!():
 
 ### Extra Details
 
-moduleName = ValueTypes
-deployerEndpoint = Initialize!()
-deployerArgs = []
-points = 10
-level = Amateur
+- moduleName = ValueTypes
+- deployerEndpoint = Initialize!()
+- deployerArgs = []
+- points = 10
+- level = Amateur
