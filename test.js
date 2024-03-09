@@ -52,7 +52,7 @@ const test = async () => {
     "https://raw.githubusercontent.com/bhimgouda/test/main/002-Value%20Types/README.md"
   );
 
-  console.log(data);
+  // console.log(data);
 
   markdownToJson(data);
 
@@ -87,7 +87,7 @@ const test = async () => {
 
         description = marked.parse(description).replaceAll("\n", "");
         jsonData["description"] = description;
-      } else if (line.startsWith("## tasks")) {
+      } else if (line.startsWith("## Tasks")) {
         currentSection = "tasks";
         taskNumber = 0;
       } else if (line.startsWith("## Start Code")) {
@@ -101,6 +101,8 @@ const test = async () => {
         currentSection = "extras";
       } else {
         if (currentSection === "tasks") {
+          if (parseInt(line[0])) {
+          }
         }
 
         // if (currentSection === "tests") {
@@ -162,7 +164,7 @@ const test = async () => {
       }
     });
 
-    return console.log(jsonData);
+    // return console.log(jsonData);
   }
 };
 
