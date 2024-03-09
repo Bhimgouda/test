@@ -1,5 +1,7 @@
 # Value Types
 
+## Description
+
 Here are some **Primitive data types** available in cocolang.
 
 1. Bool

@@ -48,7 +48,7 @@ level = Amateur</p>
 
 const test = async () => {
   const { data } = await axios.get(
-    "https://raw.githubusercontent.com/bhimgouda/test/main/001-Hello%20World/README.md"
+    "https://raw.githubusercontent.com/bhimgouda/test/main/002-Value%20Types/README.md"
   );
 
   console.log(markdownToJson(data));
@@ -62,7 +62,7 @@ const test = async () => {
       // Remove leading and trailing whitespaces
       line = line.trim();
 
-      if (line.startsWith("#")) {
+      if (line.startsWith("# ")) {
         // Extract section name
         currentSection = line.replace(/^#+\s*/, "").trim();
         if (currentSection === "Hello World") {
