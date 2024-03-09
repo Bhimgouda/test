@@ -1,6 +1,7 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const axios = require("axios");
+const marked = require("marked");
 
 const html = `
 <h1 id="hello-world">Hello World</h1>
@@ -51,11 +52,19 @@ const test = async () => {
     "https://raw.githubusercontent.com/bhimgouda/test/main/002-Value%20Types/README.md"
   );
 
+  console.log(data);
+
   markdownToJson(data);
 
   function markdownToJson(markdown) {
-    const lines = markdown.split("\n").filter((line) => line !== "");
-    let jsonData = {};
+    const lines = markdown.split("\n");
+    let jsonData = {
+      title: "",
+      description: "",
+      tasks: [],
+      startCode: "",
+      solutionCode: "",
+    };
     let currentSection = "";
 
     lines.forEach((line, index) => {
@@ -66,21 +75,35 @@ const test = async () => {
         jsonData["title"] = line.slice(2);
       }
 
-      if (line.startsWith("## ")) {
-        if (line.slice(3).toLowerCase() === "tasks") {
-          jsonData["tasks"] = [];
-          console.log(lines[index + 1]);
+      if (line.startsWith("## Tasks")) {
+        const tasks = [];
+        const newLines = lines.slice(index + 1);
+
+        for (let newLine of newLines) {
+          if (newLine.startsWith("## ")) break;
+          description += newLine + "\n";
         }
-        if (line.slice(3).toLowerCase() === "start code") {
-          jsonData["startCode"] = "";
-        }
-        if (line.slice(3).toLowerCase() === "solution code") {
-          jsonData["solutionCode"] = "";
-        }
-        if (line.slice(3).toLowerCase() === "extras") {
-        }
+
+        jsonData["tasks"].push({
+          description: lines[index + 1],
+          test: "",
+        });
       }
-      // console.log(jsonData);
+      if (line.startsWith("## Description")) {
+        let description = "";
+        const newLines = lines.slice(index + 1);
+
+        for (let newLine of newLines) {
+          if (newLine.startsWith("## ")) break;
+          description += newLine + "\n";
+        }
+        // console.log(description);
+
+        description = marked.parse(description).replaceAll("\n", "");
+        jsonData["description"] = description;
+      }
+      console.log(jsonData);
+
       return;
       if (line.startsWith("## ")) {
         // Extract section name
