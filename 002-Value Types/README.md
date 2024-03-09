@@ -19,8 +19,6 @@ When they are used as function arguments or variable assignments, their values a
 
 ## Tasks
 
-Create a persisitent state variables
-
 1. Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
 
 ```javascript

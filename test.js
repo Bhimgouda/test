@@ -51,18 +51,38 @@ const test = async () => {
     "https://raw.githubusercontent.com/bhimgouda/test/main/002-Value%20Types/README.md"
   );
 
-  console.log(markdownToJson(data));
+  markdownToJson(data);
 
   function markdownToJson(markdown) {
-    const lines = markdown.split("\n");
+    const lines = markdown.split("\n").filter((line) => line !== "");
     let jsonData = {};
     let currentSection = "";
 
-    lines.forEach((line) => {
+    lines.forEach((line, index) => {
       // Remove leading and trailing whitespaces
       line = line.trim();
 
       if (line.startsWith("# ")) {
+        jsonData["title"] = line.slice(2);
+      }
+
+      if (line.startsWith("## ")) {
+        if (line.slice(3).toLowerCase() === "tasks") {
+          jsonData["tasks"] = [];
+          console.log(lines[index + 1]);
+        }
+        if (line.slice(3).toLowerCase() === "start code") {
+          jsonData["startCode"] = "";
+        }
+        if (line.slice(3).toLowerCase() === "solution code") {
+          jsonData["solutionCode"] = "";
+        }
+        if (line.slice(3).toLowerCase() === "extras") {
+        }
+      }
+      // console.log(jsonData);
+      return;
+      if (line.startsWith("## ")) {
         // Extract section name
         currentSection = line.replace(/^#+\s*/, "").trim();
         if (currentSection === "Hello World") {
@@ -72,12 +92,11 @@ const test = async () => {
         }
       } else if (currentSection === "Tasks" && line.match(/^\d+\./)) {
         // Extract task details
-        const taskNumber = line.match(/^\d+/)[0];
-        const taskName = line.replace(/^\d+\.\s*/, "");
-        jsonData[currentSection].push({ number: taskNumber, name: taskName });
+        const taskDescription = line.replace(/^\d+\.\s*/, "");
+        jsonData[currentSection].push({ description: taskDescription });
       } else if (
         currentSection === "Start Code" ||
-        currentSection === "End Code"
+        currentSection === "Solution Code"
       ) {
         // Extract code blocks
         if (!jsonData[currentSection]) {
