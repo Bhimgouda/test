@@ -45,55 +45,55 @@ Create a persistent state variable of type **U256** called **Bit256UnsignedInteg
 
 ## Tests
 
-1. ```javascript
-   async (logicDriver, expect) => {
-     const justABoolean = await logicDriver.persistentState.get("justABoolean");
-     expect(justABoolean).to.be.equal(true);
-   };
-   ```
+```javascript
+async (logicDriver, expect) => {
+  const justABoolean = await logicDriver.persistentState.get("justABoolean");
+  expect(justABoolean).to.be.equal(true);
+};
+```
 
-2. ```javascript
-   async (logicDriver, expect) => {
-       const justAString = await logicDriver.persistentState.get("justAString");
-       expect(justAString).to.be.equal("I am a string");
-   },
-   ```
+```javascript
+async (logicDriver, expect) => {
+    const justAString = await logicDriver.persistentState.get("justAString");
+    expect(justAString).to.be.equal("I am a string");
+},
+```
 
-3. ```javascript
-   async (logicDriver, expect) => {
-       const bit64Integer = await logicDriver.persistentState.get(
-         "bit64Integer"
-       );
-       expect(bit64Integer).to.be.equal(-20);
-       },
-   ```
+```javascript
+async (logicDriver, expect) => {
+    const bit64Integer = await logicDriver.persistentState.get(
+      "bit64Integer"
+    );
+    expect(bit64Integer).to.be.equal(-20);
+},
+```
 
-4. ```javascript
-   async (logicDriver, expect) => {
-       const bit256Integer = await logicDriver.persistentState.get(
-           "bit256Integer"
-       );
-       expect(bit256Integer).to.be.equal(50);
-   },
-   ```
+```javascript
+async (logicDriver, expect) => {
+    const bit256Integer = await logicDriver.persistentState.get(
+        "bit256Integer"
+    );
+    expect(bit256Integer).to.be.equal(50);
+},
+```
 
-5. ```javascript
-   async (logicDriver, expect) => {
-         const bit64UnsignedInteger = await logicDriver.persistentState.get(
-           "bit64UnsignedInteger"
-         );
-         expect(bit64UnsignedInteger).to.be.equal(20);
-       },
-   ```
+```javascript
+async (logicDriver, expect) => {
+      const bit64UnsignedInteger = await logicDriver.persistentState.get(
+        "bit64UnsignedInteger"
+      );
+      expect(bit64UnsignedInteger).to.be.equal(20);
+    },
+```
 
-6. ```javascript
-   async (logicDriver, expect) => {
-         const bit256UnsignedInteger = await logicDriver.persistentState.get(
-           "bit256UnsignedInteger"
-         );
-         expect(bit256UnsignedInteger).to.be.equal(50);
-       },
-   ```
+```javascript
+async (logicDriver, expect) => {
+      const bit256UnsignedInteger = await logicDriver.persistentState.get(
+        "bit256UnsignedInteger"
+      );
+      expect(bit256UnsignedInteger).to.be.equal(50);
+    },
+```
 
 ## Start Code
 
@@ -101,12 +101,12 @@ Create a persistent state variable of type **U256** called **Bit256UnsignedInteg
 coco ValueTypes
 
 state persistent:
-justABytes Bytes
-justAnAddress Address
+    justABytes Bytes
+    justAnAddress Address
 
 endpoint deployer Initialize!():
-mutate 0x -> ValueTypes.State.justABytes
-mutate Address(Sender) -> ValueTypes.State.justAnAddress
+    mutate 0x -> ValueTypes.State.justABytes
+    mutate Address(Sender) -> ValueTypes.State.justAnAddress
 ```
 
 ## Solution Code
@@ -115,25 +115,24 @@ mutate Address(Sender) -> ValueTypes.State.justAnAddress
 coco ValueTypes
 
 state persistent:
-justABytes Bytes
-justAnAddress Address
-justABoolean Bool
-justAString String
-bit64Integer I64
-bit256Integer I256
-bit64UnsignedInteger U64
-bit256UnsignedInteger U256
+    justABytes Bytes
+    justAnAddress Address
+    justABoolean Bool
+    justAString String
+    bit64Integer I64
+    bit256Integer I256
+    bit64UnsignedInteger U64
+    bit256UnsignedInteger U256
 
 endpoint deployer Initialize!():
-mutate 0x -> ValueTypes.State.justABytes
-mutate Address(Sender) -> ValueTypes.State.justAnAddress
-mutate true -> ValueTypes.State.justABoolean
-mutate "I am a string" -> ValueTypes.State.justAString
-mutate -20 -> ValueTypes.State.bit64Integer
-mutate 50 -> ValueTypes.State.bit256Integer
-mutate 20 -> ValueTypes.State.bit64UnsignedInteger
-mutate 50 -> ValueTypes.State.bit256UnsignedInteger
-
+    mutate 0x -> ValueTypes.State.justABytes
+    mutate Address(Sender) -> ValueTypes.State.justAnAddress
+    mutate true -> ValueTypes.State.justABoolean
+    mutate "I am a string" -> ValueTypes.State.justAString
+    mutate -20 -> ValueTypes.State.bit64Integer
+    mutate 50 -> ValueTypes.State.bit256Integer
+    mutate 20 -> ValueTypes.State.bit64UnsignedInteger
+    mutate 50 -> ValueTypes.State.bit256UnsignedInteger
 ```
 
 ## Extra Details
