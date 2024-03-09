@@ -1,0 +1,243 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: constant
+  data:
+    type: string
+    value: '0x06737472696e6720746f6f206c6f6e67'
+- ptr: 1
+  kind: constant
+  data:
+    type: string
+    value: '0x06636f636f'
+- ptr: 2
+  kind: constant
+  data:
+    type: string
+    value: 0x064e616d65206973206e6f7420636f636f
+- ptr: 3
+  kind: constant
+  data:
+    type: u64
+    value: '0x030a'
+- ptr: 4
+  kind: constant
+  data:
+    type: string
+    value: 0x0659206973206e6f742067726561746572207468616e2030
+- ptr: 5
+  kind: class
+  data:
+    name: TooLong
+    fields: []
+    methods:
+    - ptr: 9
+      code: 1
+- ptr: 6
+  deps:
+  - 1
+  - 2
+  kind: routine
+  data:
+    name: TestName
+    kind: invokable
+    accepts:
+    - slot: 0
+      label: name
+      type: string
+    returns:
+    - slot: 0
+      label: result
+      type: bool
+    executes:
+      bin:
+      - 4
+      - 0
+      - 0
+      - 17
+      - 1
+      - 1
+      - 16
+      - 1
+      - 1
+      - 70
+      - 0
+      - 0
+      - 1
+      - 98
+      - 0
+      - 0
+      - 98
+      - 0
+      - 0
+      - 17
+      - 1
+      - 11
+      - 3
+      - 1
+      - 0
+      - 17
+      - 0
+      - 2
+      - 16
+      - 0
+      - 0
+      - 65
+      - 0
+      - 1
+      - 41
+      - 0
+      - 1
+      - 98
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0
+- ptr: 7
+  deps:
+  - 3
+  - 5
+  kind: routine
+  data:
+    name: CheckNameLength
+    kind: invokable
+    accepts:
+    - slot: 0
+      label: name
+      type: string
+    returns:
+    - slot: 0
+      label: result
+      type: bool
+    executes:
+      bin:
+      - 4
+      - 0
+      - 0
+      - 74
+      - 0
+      - 0
+      - 17
+      - 1
+      - 3
+      - 16
+      - 1
+      - 1
+      - 69
+      - 0
+      - 0
+      - 1
+      - 98
+      - 0
+      - 0
+      - 17
+      - 1
+      - 11
+      - 3
+      - 1
+      - 0
+      - 17
+      - 0
+      - 5
+      - 40
+      - 0
+      - 0
+      - 65
+      - 0
+      - 1
+- ptr: 8
+  deps:
+  - 4
+  kind: routine
+  data:
+    name: Div
+    kind: invokable
+    accepts:
+    - slot: 0
+      label: x
+      type: u64
+    - slot: 1
+      label: y
+      type: u64
+    returns:
+    - slot: 0
+      label: quotient
+      type: u64
+    executes:
+      bin:
+      - 4
+      - 0
+      - 1
+      - 41
+      - 1
+      - 5
+      - 69
+      - 1
+      - 0
+      - 1
+      - 98
+      - 1
+      - 1
+      - 98
+      - 1
+      - 1
+      - 17
+      - 2
+      - 10
+      - 3
+      - 2
+      - 1
+      - 17
+      - 1
+      - 4
+      - 16
+      - 1
+      - 1
+      - 65
+      - 1
+      - 1
+      - 4
+      - 1
+      - 0
+      - 104
+      - 0
+      - 1
+      - 0
+      - 5
+      - 0
+      - 0
+- ptr: 9
+  deps:
+  - 0
+  - 5
+  kind: method
+  data:
+    name: __throw__
+    kind: local
+    class: TooLong
+    accepts:
+    - slot: 0
+      label: self
+      type: TooLong
+    returns:
+    - slot: 0
+      label: err
+      type: string
+    executes:
+      bin:
+      - 17
+      - 0
+      - 0
+      - 16
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0

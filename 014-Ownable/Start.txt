@@ -1,0 +1,4 @@
+coco Ownable
+
+state persistent:
+    owner Address

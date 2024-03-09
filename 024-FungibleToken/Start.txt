@@ -1,0 +1,21 @@
+coco FungibleToken
+
+state persistent:
+    name String
+    symbol String
+    decimals U64
+    totalSupply U64
+    allowance Map[Address]Map[Address]U64
+    balanceOf Map[Address]U64
+
+endpoint deployer Init!(
+    totalSupply U64,
+    name String,
+    symbol String
+):
+    mutate totalSupply -> FungibleToken.State.totalSupply
+    mutate name -> FungibleToken.State.name
+    mutate symbol -> FungibleToken.State.symbol
+
+    mutate balanceOf <- FungibleToken.State.symbol:
+        balanceOf[Address(Sender)] = totalSupply

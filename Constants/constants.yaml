@@ -1,0 +1,57 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: constant
+  data:
+    type: u64
+    value: '0x0379'
+- ptr: 1
+  kind: constant
+  data:
+    type: u64
+    value: '0x037530'
+- ptr: 2
+  kind: routine
+  data:
+    name: GetFuelPrice
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: fuelPrice
+      type: u64
+    executes:
+      bin:
+      - 17
+      - 0
+      - 0
+      - 16
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0
+- ptr: 3
+  kind: routine
+  data:
+    name: GetFuelLimit
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: fuelLimit
+      type: u64
+    executes:
+      bin:
+      - 17
+      - 0
+      - 1
+      - 16
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0

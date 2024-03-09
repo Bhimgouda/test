@@ -1,0 +1,45 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: aBool
+      type: bool
+    - slot: 1
+      label: aString
+      type: string
+    - slot: 2
+      label: aBytes
+      type: bytes
+    - slot: 3
+      label: anAddress
+      type: address
+    - slot: 4
+      label: u64
+      type: u64
+    - slot: 5
+      label: i64
+      type: i64
+    - slot: 6
+      label: u256
+      type: u256
+    - slot: 7
+      label: i256
+      type: i256
+- ptr: 1
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts: []
+    returns: []
+    executes:
+      bin: []

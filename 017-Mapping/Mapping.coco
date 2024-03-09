@@ -1,0 +1,55 @@
+coco Mapping
+
+state persistent:
+    // Mapping of Address (User Address) => U64 (User Balance)
+    balances Map[Address]U64
+    // Nested Mapping of Address (User Address) => Address (User Address)
+    // => Bool (whether they are friends)
+    isFriend Map[Address]Map[Address]Bool
+
+endpoint deployer Init!():
+    pass
+
+func examples!():
+    var user = Address(Sender)
+
+    // Insert
+    mutate balances <- Mapping.State.balances:
+        balances[user] = 121
+
+    // Read
+    var userCurrentBalance U64
+    observe balances <- Mapping.State.balances:
+        userCurrentBalance = balances[user]
+
+    // Update
+    mutate balances <- Mapping.State.balances:
+        balances[user] += 212
+
+    // Delete is yet to be added
+
+// For Task
+endpoint invokable LetsBeFriends!():
+    var user = Address(Sender)
+    var logic = Address(Sender)
+
+    mutate isFriend <- Mapping.State.isFriend:
+        isFriend[user][logic] = true
+        isFriend[logic][user] = true
+
+endpoint invokable Get(user Address)->(balance U64):
+    observe balances <- Mapping.State.balances:
+        return (balance: balances[user])
+
+endpoint invokable Set!()->(newBalance U64):
+    var user = Address(Sender)
+
+    mutate balances <- Mapping.State.balances:
+        balances[user] += 1
+        return (newBalance: balances[user])
+
+
+
+
+
+

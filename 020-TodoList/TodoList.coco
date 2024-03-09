@@ -1,0 +1,42 @@
+coco TodoList
+
+state persistent:
+    todos []Todo
+    owner Address
+
+class Todo:
+    field id U64
+    field name String
+    field completed Bool
+
+func onlyOwner():
+     observe owner <- TodoList.State.owner:
+        if Address(Sender) != owner:
+            throw "Not an Owner"
+
+endpoint deployer InitOwner!():
+    mutate Address(Sender) -> TodoList.State.owner
+
+endpoint invokable CreateTodo!(name String):
+    onlyOwner()
+    mutate todos <- TodoList.State.todos:
+        var newTodo = Todo{id: len(todos), name: name, completed: false}
+        todos = append(todos, newTodo)
+
+endpoint invokable UpdateTodo!(id U64, name String):
+    onlyOwner()
+    mutate todos <- TodoList.State.todos:
+        todos[id].name = name
+
+endpoint invokable MarkTodoCompleted!(id U64):
+    onlyOwner()
+    mutate todos <- TodoList.State.todos:
+        todos[id].completed = true
+
+endpoint invokable GetTodos()->(allTodos []Todo):
+    observe todos <- TodoList.State.todos:
+        return (allTodos: todos)
+
+
+
+

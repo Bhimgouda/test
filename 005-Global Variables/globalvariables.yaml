@@ -1,0 +1,153 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: constant
+  data:
+    type: string
+    value: '0x06537472696e67'
+- ptr: 1
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: myString
+      type: string
+- ptr: 2
+  deps:
+  - 1
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts: []
+    returns: []
+    executes:
+      bin: []
+- ptr: 3
+  kind: routine
+  data:
+    name: globalVars
+    kind: local
+    accepts: []
+    returns: []
+    executes:
+      bin:
+      - 114
+      - 0
+      - 73
+      - 0
+      - 0
+      - 115
+      - 0
+      - 73
+      - 0
+      - 0
+      - 113
+      - 0
+      - 10
+      - 1
+      - 82
+      - 1
+      - 0
+      - 0
+      - 10
+      - 0
+      - 13
+      - 0
+      - 16
+      - 1
+      - 113
+      - 0
+      - 10
+      - 1
+      - 82
+      - 1
+      - 0
+      - 0
+      - 10
+      - 0
+      - 13
+      - 0
+      - 17
+      - 1
+      - 112
+      - 0
+      - 10
+      - 1
+      - 82
+      - 1
+      - 0
+      - 0
+      - 10
+      - 0
+      - 13
+      - 0
+      - 17
+      - 1
+      - 112
+      - 0
+      - 10
+      - 1
+      - 82
+      - 1
+      - 0
+      - 0
+      - 10
+      - 0
+      - 13
+      - 0
+      - 18
+      - 1
+      - 112
+      - 0
+      - 10
+      - 1
+      - 82
+      - 1
+      - 0
+      - 0
+      - 10
+      - 0
+      - 13
+      - 0
+      - 16
+      - 1
+- ptr: 4
+  deps:
+  - 0
+  - 1
+  kind: routine
+  data:
+    name: GetMyString
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: aString
+      type: string
+    executes:
+      bin: []
+- ptr: 5
+  kind: routine
+  data:
+    name: GetSenderAddress
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: senderAddress
+      type: address
+    executes:
+      bin:
+      - 115
+      - 0
+      - 73
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0

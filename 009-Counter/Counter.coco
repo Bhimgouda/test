@@ -1,0 +1,15 @@
+coco Counter
+
+state persistent:
+    count U64
+
+endpoint deployer Init!():
+    pass
+
+endpoint invokable Increment!():
+    mutate counter <- Counter.State.count:
+        counter++
+
+endpoint invokable Decrement!():
+    mutate counter <- Counter.State.count:
+        counter--

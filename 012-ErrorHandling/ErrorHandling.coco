@@ -1,0 +1,24 @@
+coco ErrorHandling
+
+class TooLong:
+    method __throw__(self)->(err String):
+        yield err "string too long"
+
+// Normal way of throwing Error
+endpoint invokable TestName(name String)->(result Bool):
+    if name != "coco":
+        throw "Name is not coco"
+    
+    return (result: true)
+
+// Using Classes
+endpoint invokable CheckNameLength(name String)->(result Bool):
+    if len(name) > 10:
+        throw TooLong{}
+
+endpoint invokable Div(x U64, y U64)->(quotient U64):
+    if y <= 0: 
+        throw "Y is not greater than 0"
+
+    quotient = x/y
+    

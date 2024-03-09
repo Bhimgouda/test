@@ -1,0 +1,64 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: text
+      type: string
+- ptr: 1
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts: []
+    returns: []
+    executes:
+      bin: []
+- ptr: 2
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Set!
+    kind: invokable
+    accepts:
+    - slot: 0
+      label: text
+      type: string
+    returns: []
+    executes:
+      bin:
+      - 4
+      - 0
+      - 0
+      - 129
+      - 0
+      - 0
+- ptr: 3
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Get
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: text
+      type: string
+    executes:
+      bin:
+      - 128
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0

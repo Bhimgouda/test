@@ -1,0 +1,62 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: count
+      type: u64
+- ptr: 1
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts: []
+    returns: []
+    executes:
+      bin: []
+- ptr: 2
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Increment!
+    kind: invokable
+    accepts: []
+    returns: []
+    executes:
+      bin:
+      - 128
+      - 0
+      - 0
+      - 99
+      - 0
+      - 129
+      - 0
+      - 0
+- ptr: 3
+  deps:
+  - 0
+  kind: routine
+  data:
+    name: Decrement!
+    kind: invokable
+    accepts: []
+    returns: []
+    executes:
+      bin:
+      - 128
+      - 0
+      - 0
+      - 100
+      - 0
+      - 129
+      - 0
+      - 0

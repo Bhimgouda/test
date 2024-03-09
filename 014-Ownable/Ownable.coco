@@ -1,0 +1,21 @@
+coco Ownable
+
+state persistent:
+    owner Address
+
+endpoint deployer InitOwner!():
+    mutate Address(Sender) -> Ownable.State.owner
+
+func onlyOwner():
+    observe owner <- Ownable.State.owner:
+        if Address(Sender) != owner:
+            throw "Not an Owner"
+
+endpoint deployer setNewOwner!(newOwner Address):
+    onlyOwner()
+    mutate newOwner -> Ownable.State.owner
+
+    
+
+
+

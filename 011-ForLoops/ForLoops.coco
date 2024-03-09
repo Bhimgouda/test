@@ -1,0 +1,27 @@
+coco ForLoops
+
+endpoint invokable ForLoop():
+    for i in range(10):
+        if i == 3:
+            // Skip to next iteration with continue keyword
+            continue
+        if i == 5:
+            // Exit loop with break keyword
+            break
+
+endpoint invokable AllNumbersPositive(numArr []I64)->(allPositive Bool):
+    for num in numArr:
+        if num < 0:
+            return (allPositive: false)
+    
+    return (allPositive: true)
+
+endpoint invokable GetSum(num U64)->(sum U64):
+    for i in range(num):
+        sum += i
+
+endpoint invokable IncrementAll(numArr []U64)->(incrementedArr []U64):
+    for i in numArr:
+        numArr[i]++
+
+    return (incrementedArr:numArr)

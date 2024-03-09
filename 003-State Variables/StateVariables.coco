@@ -1,0 +1,26 @@
+coco StateVariables
+
+state persistent:
+    num U64
+
+// Mutating Deployer Endpoint
+endpoint deployer InitializeNum!():
+    var newNum = 21
+    mutate newNum -> StateVariables.State.num 
+
+// Mutating/Write Endpoints
+endpoint invokable SetNum!(newNum U64):
+    mutate newNum -> StateVariables.State.num
+
+endpoint invokable ResetNum!():
+    mutate 0 -> StateVariables.State.num
+
+// Non-mutating/Read-only Endpoints
+// It does not make any updates to the blockchain.
+endpoint invokable GetNum()->(theNum U64):
+    observe theNum <- StateVariables.State.num
+
+endpoint invokable GetNumPlusOne()->(numPlusOne U64):
+    observe num <- StateVariables.State.num:
+        numPlusOne = num + 1
+

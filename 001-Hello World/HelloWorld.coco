@@ -1,0 +1,28 @@
+// This file is for testing start code and end code
+
+/////////////////////
+/// Start Code
+////////////////////
+
+// coco HelloWorld
+
+// state persistent:
+//     myString String
+//     // Write your code here
+
+// endpoint deployer Initialize!():
+//     mutate "My String" -> HelloWorld.State.myString
+
+/////////////////////
+/// Solution Code
+////////////////////
+
+// coco HelloWorld
+
+// state persistent:
+//     myString String
+//     greet String
+
+// endpoint deployer Initialize!():
+//     mutate "My String" -> HelloWorld.State.myString
+//     mutate "Hello World" -> HelloWorld.State.greet

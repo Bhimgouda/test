@@ -1,0 +1,12 @@
+coco Constants
+
+const FUEL_PRICE U64 = 121
+const FUEL_LIMIT U64 = 30000
+
+endpoint invokable GetFuelPrice()->(fuelPrice U64):
+    fuelPrice = FUEL_PRICE
+
+endpoint invokable GetFuelLimit()->(fuelLimit U64):
+    fuelLimit = FUEL_LIMIT
+
+    

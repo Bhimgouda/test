@@ -1,0 +1,69 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: typedef
+  data: map[address]map[address]u64
+- ptr: 1
+  kind: typedef
+  data: map[address]u64
+- ptr: 2
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: totalSupply
+      type: u64
+    - slot: 1
+      label: name
+      type: string
+    - slot: 2
+      label: symbol
+      type: string
+    - slot: 3
+      label: allowance
+      type: map[address]map[address]u64
+    - slot: 4
+      label: balanceOf
+      type: map[address]u64
+- ptr: 3
+  deps:
+  - 2
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts:
+    - slot: 0
+      label: totalSupply
+      type: u64
+    - slot: 1
+      label: name
+      type: string
+    - slot: 2
+      label: symbol
+      type: string
+    returns: []
+    executes:
+      bin:
+      - 4
+      - 0
+      - 0
+      - 129
+      - 0
+      - 0
+      - 4
+      - 0
+      - 1
+      - 129
+      - 0
+      - 1
+      - 4
+      - 0
+      - 2
+      - 129
+      - 0
+      - 2

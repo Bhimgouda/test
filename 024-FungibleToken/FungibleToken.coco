@@ -1,0 +1,103 @@
+coco FungibleToken
+
+state persistent:
+    name String
+    symbol String
+    decimals U64
+    totalSupply U64
+    balanceOf Map[Address]U64
+    allowance Map[Address]Map[Address]U64
+
+endpoint deployer Seed!(
+    name String,
+    symbol String,
+    decimals U64,
+    totalSupply U64,
+):
+    mutate name -> FungibleToken.State.name
+    mutate symbol -> FungibleToken.State.symbol
+    mutate decimals -> FungibleToken.State.decimals
+
+    mint!(account: Address(Sender), value: totalSupply)
+
+func transfer!(from Address, to Address, value U64):
+    if from == Address(0):
+        throw "Invalid Sender Address"
+    if to == Address(0):
+        throw "Invalid Recipient Address"
+    
+    mutate balanceOf <- FungibleToken.State.balanceOf:
+        if balanceOf[from] < value:
+            throw "Insufficient Balance"
+        
+        balanceOf[from] -= value
+        balanceOf[to] += value
+
+func mint!(account Address, value U64):
+    if account == Address(0):
+        throw "Invalid Receiver Address"
+
+    mutate totalSupply <- FungibleToken.State.totalSupply:
+        totalSupply += value
+
+    mutate balanceOf <- FungibleToken.State.balanceOf:
+        balanceOf[account] += value
+
+func burn!(account Address, value U64):
+    if account == Address(0):
+        throw "Invalid Sender Address"
+
+    mutate totalSupply <- FungibleToken.State.totalSupply:
+        totalSupply -= value
+
+    mutate balanceOf <- FungibleToken.State.balanceOf:
+        balanceOf[account] -= value
+
+endpoint invokable Transfer!(to Address, value U64):
+    transfer!(from: Address(Sender), to, value)
+
+
+endpoint invokable Approve!(spender Address, value U64):
+    if spender == Address(0):
+        throw "Invalid Spender Address"
+
+    var owner = Address(Sender)
+
+    mutate allowance <- FungibleToken.State.allowance:
+        allowance[owner][spender] = value
+
+
+endpoint invokable TransferFrom!(from Address, to Address, value U64):
+    var spender = Address(Sender)
+    
+    mutate allowance <- FungibleToken.State.allowance:
+        if allowance[from][spender] < value:
+            throw "Insufficient Allowance"
+
+        allowance[from][spender] -= value
+
+    transfer!(from, to, value)
+
+////////////////////////
+// Observe/Read Endpoints
+///////////////////////
+
+endpoint invokable Name()->(name String):
+    observe name <- FungibleToken.State.name
+
+endpoint invokable Symbol()->(symbol String):
+    observe symbol <- FungibleToken.State.symbol
+
+endpoint invokable Decimals()->(decimals U64):
+    observe decimals <- FungibleToken.State.decimals
+
+endpoint invokable TotalSupply()->(totalSupply U64):
+    observe totalSupply <- FungibleToken.State.totalSupply
+
+endpoint invokable BalanceOf(account Address)->(balance U64):
+    observe balanceOf <- FungibleToken.State.balanceOf:
+        yield balance balanceOf[account]
+
+endpoint invokable Allowance(owner Address, spender Address)->(allowance U64):
+    observe allowanceFrom <- FungibleToken.State.allowance:
+        yield allowance allowanceFrom[owner][spender]

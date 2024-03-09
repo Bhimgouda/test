@@ -1,0 +1,21 @@
+coco ValueTypes
+
+state persistent:
+    justABytes Bytes 
+    justAnAddress Address
+    justABoolean Bool
+    justAString String
+    bit64Integer I64
+    bit256Integer I256
+    bit64UnsignedInteger U64
+    bit256UnsignedInteger U256
+
+endpoint deployer Initialize!():
+    mutate 0x -> ValueTypes.State.justABytes
+    mutate Address(Sender) -> ValueTypes.State.justAnAddress
+    mutate true -> ValueTypes.State.justABoolean
+    mutate "I am a string" -> ValueTypes.State.justAString
+    mutate -20 -> ValueTypes.State.bit64Integer
+    mutate 50 -> ValueTypes.State.bit256Integer
+    mutate 20 -> ValueTypes.State.bit64UnsignedInteger
+    mutate 50 -> ValueTypes.State.bit256UnsignedInteger

@@ -1,0 +1,14 @@
+coco DefaultValues
+
+state persistent:
+    aBool Bool // False
+    aString String // ""
+    aBytes Bytes // 0x00..
+    anAddress Address // 0x00
+    u64 U64 // 0
+    i64 I64 // 0
+    u256 U256 // 0
+    i256 I256 // 0
+
+endpoint deployer Init!():
+    pass

@@ -1,0 +1,19 @@
+1. What happens when we try to update
+an item that is out of bounds in an
+array (some error or gets passed)
+
+in solidity it passes if we explicitly don't add a require
+
+2. what happens in
+    state persistent:
+        items []String
+
+    mutate items <- List.State.items:
+    does it come to memory, if yes
+    then how does it revert back the
+    value(seems like solidity storage variable)
+
+
+    observe items <- List.State.items:
+        I feel like this definitely comes to memory under
+        the context

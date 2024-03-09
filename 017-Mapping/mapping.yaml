@@ -1,0 +1,250 @@
+syntax: 0.1.0
+engine:
+  kind: PISA
+  flags: []
+elements:
+- ptr: 0
+  kind: constant
+  data:
+    type: u64
+    value: '0x0379'
+- ptr: 1
+  kind: constant
+  data:
+    type: u64
+    value: '0x03d4'
+- ptr: 2
+  kind: typedef
+  data: map[address]u64
+- ptr: 3
+  kind: typedef
+  data: map[address]map[address]bool
+- ptr: 4
+  kind: state
+  data:
+    kind: persistent
+    fields:
+    - slot: 0
+      label: balances
+      type: map[address]u64
+    - slot: 1
+      label: isFriend
+      type: map[address]map[address]bool
+- ptr: 5
+  deps:
+  - 4
+  kind: routine
+  data:
+    name: Init!
+    kind: deployer
+    accepts: []
+    returns: []
+    executes:
+      bin: []
+- ptr: 6
+  deps:
+  - 0
+  - 1
+  - 4
+  kind: routine
+  data:
+    name: examples!
+    kind: local
+    accepts: []
+    returns: []
+    executes:
+      bin:
+      - 115
+      - 0
+      - 73
+      - 0
+      - 0
+      - 128
+      - 1
+      - 0
+      - 17
+      - 2
+      - 0
+      - 16
+      - 2
+      - 2
+      - 84
+      - 1
+      - 0
+      - 2
+      - 129
+      - 1
+      - 0
+      - 128
+      - 1
+      - 0
+      - 83
+      - 2
+      - 1
+      - 0
+      - 17
+      - 3
+      - 1
+      - 16
+      - 3
+      - 3
+      - 101
+      - 2
+      - 2
+      - 3
+      - 84
+      - 1
+      - 0
+      - 2
+      - 129
+      - 1
+      - 0
+- ptr: 7
+  deps:
+  - 4
+  kind: routine
+  data:
+    name: LetsBeFriends!
+    kind: invokable
+    accepts: []
+    returns: []
+    executes:
+      bin:
+      - 115
+      - 0
+      - 73
+      - 0
+      - 0
+      - 115
+      - 1
+      - 73
+      - 1
+      - 1
+      - 128
+      - 2
+      - 1
+      - 41
+      - 3
+      - 1
+      - 98
+      - 3
+      - 3
+      - 83
+      - 4
+      - 2
+      - 0
+      - 84
+      - 4
+      - 1
+      - 3
+      - 84
+      - 2
+      - 0
+      - 4
+      - 41
+      - 3
+      - 1
+      - 98
+      - 3
+      - 3
+      - 83
+      - 4
+      - 2
+      - 1
+      - 84
+      - 4
+      - 0
+      - 3
+      - 84
+      - 2
+      - 1
+      - 4
+      - 129
+      - 2
+      - 1
+- ptr: 8
+  deps:
+  - 4
+  kind: routine
+  data:
+    name: Get
+    kind: invokable
+    accepts:
+    - slot: 0
+      label: user
+      type: address
+    returns:
+    - slot: 0
+      label: balance
+      type: u64
+    executes:
+      bin:
+      - 128
+      - 0
+      - 0
+      - 4
+      - 1
+      - 0
+      - 83
+      - 0
+      - 0
+      - 1
+      - 5
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0
+- ptr: 9
+  deps:
+  - 4
+  kind: routine
+  data:
+    name: Set!
+    kind: invokable
+    accepts: []
+    returns:
+    - slot: 0
+      label: newBalance
+      type: u64
+    executes:
+      bin:
+      - 115
+      - 0
+      - 73
+      - 0
+      - 0
+      - 128
+      - 1
+      - 0
+      - 83
+      - 2
+      - 1
+      - 0
+      - 41
+      - 3
+      - 5
+      - 99
+      - 3
+      - 101
+      - 2
+      - 2
+      - 3
+      - 84
+      - 1
+      - 0
+      - 2
+      - 83
+      - 0
+      - 1
+      - 0
+      - 5
+      - 0
+      - 0
+      - 5
+      - 0
+      - 0
+      - 0
+      - 129
+      - 1
+      - 0

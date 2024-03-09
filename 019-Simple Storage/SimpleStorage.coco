@@ -1,0 +1,13 @@
+coco SimpleStorage
+
+state persistent:
+    text String
+
+endpoint deployer Init!():
+    pass
+
+endpoint invokable Set!(text String):
+    mutate text -> SimpleStorage.State.text
+
+endpoint invokable Get()->(text String):
+    observe text <- SimpleStorage.State.text

@@ -1,0 +1,23 @@
+coco IdentityStorage
+
+state persistent:
+    persons Map[U64]Person
+
+class Person:
+    field name String
+    field age U64
+    field relations Map[String]String
+
+endpoint deployer Init!():
+    pass
+
+endpoint invokable AddPerson!(name String, age U64, relations Map[String]String):
+    mutate persons <- IdentityStorage.State.persons:
+        var newPerson = Person{age: age, relations: relations}
+        persons[len(persons)] = newPerson
+
+endpoint invokable GetPerson(id U64)->(person Person):
+    observe persons <- IdentityStorage.State.persons:
+        return (person: persons[id])
+
+
