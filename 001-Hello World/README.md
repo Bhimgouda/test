@@ -30,7 +30,7 @@ Time to say Hello Coco
         mutate "My String" -> HelloWorld.State.myString
 ```
 
-### End Code
+## Solution Code
 
 ```
     coco HelloWorld

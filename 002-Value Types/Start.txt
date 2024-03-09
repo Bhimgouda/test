@@ -1,9 +1,0 @@
-coco ValueTypes
-
-state persistent:
-    justABytes Bytes 
-    justAnAddress Address
-
-endpoint deployer Initialize!():
-    mutate 0x -> ValueTypes.State.justABytes
-    mutate Address(Sender) -> ValueTypes.State.justAnAddress

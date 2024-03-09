@@ -48,10 +48,58 @@ level = Amateur</p>
 
 const test = async () => {
   const { data } = await axios.get(
-    "https://raw.githubusercontent.com/sarvalabs/js-moi-examples/main/README.md"
+    "https://raw.githubusercontent.com/bhimgouda/test/main/001-Hello%20World/README.md"
   );
 
-  console.log(data.split("\n"));
+  console.log(markdownToJson(data));
+
+  function markdownToJson(markdown) {
+    const lines = markdown.split("\n");
+    let jsonData = {};
+    let currentSection = "";
+
+    lines.forEach((line) => {
+      // Remove leading and trailing whitespaces
+      line = line.trim();
+
+      if (line.startsWith("#")) {
+        // Extract section name
+        currentSection = line.replace(/^#+\s*/, "").trim();
+        if (currentSection === "Hello World") {
+          jsonData[currentSection] = {};
+        } else if (currentSection === "Tasks") {
+          jsonData[currentSection] = [];
+        }
+      } else if (currentSection === "Tasks" && line.match(/^\d+\./)) {
+        // Extract task details
+        const taskNumber = line.match(/^\d+/)[0];
+        const taskName = line.replace(/^\d+\.\s*/, "");
+        jsonData[currentSection].push({ number: taskNumber, name: taskName });
+      } else if (
+        currentSection === "Start Code" ||
+        currentSection === "End Code"
+      ) {
+        // Extract code blocks
+        if (!jsonData[currentSection]) {
+          jsonData[currentSection] = [];
+        }
+        if (line.startsWith("```")) {
+          // Start of code block
+          jsonData[currentSection].push("");
+        } else if (!line.startsWith("```")) {
+          // Inside code block
+          const lastIndex = jsonData[currentSection].length - 1;
+          jsonData[currentSection][lastIndex] += line + "\n";
+        }
+      } else if (currentSection === "Extra Details" && line.trim() !== "") {
+        // Extract extra details
+        const parts = line.split("=").map((part) => part.trim());
+        jsonData[parts[0]] = parts[1];
+      }
+    });
+
+    return jsonData;
+  }
 };
 
 test();
