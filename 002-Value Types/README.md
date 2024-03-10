@@ -1,5 +1,8 @@
 # Value Types
 
+- points = 10
+- level = Amateur
+
 ## Description
 
 Here are some **Primitive data types** available in cocolang.
@@ -19,26 +22,9 @@ When they are used as function arguments or variable assignments, their values a
 
 ## Tasks
 
+### Task 1
+
 1. Create a persistent state variable of type **Bool** called **justABoolean** and initialize it to **true**
-
-   - Just for fun
-   - Just for bun
-
-   ```
-   const a = a+b;
-   ```
-
-2. Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
-
-3. Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
-
-4. Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
-
-5. Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
-
-6. Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
-
-## Tests
 
 ```javascript
 async (logicDriver, expect) => {
@@ -46,6 +32,22 @@ async (logicDriver, expect) => {
   expect(justABoolean).to.be.equal(true);
 };
 ```
+
+```html
+<ul></ul>
+```
+
+1. Create a persistent state variable of type **String** called **justAString** and initialize it to **"I am a string"**
+
+1. Create a persistent state variable of type **I64** called **bit64Integer** and initialize it to **-20**
+
+1. Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
+
+1. Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
+
+1. Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
+
+## Tests
 
 ```javascript
 async (logicDriver, expect) => {
@@ -130,10 +132,8 @@ endpoint deployer Initialize!():
     mutate 50 -> ValueTypes.State.bit256UnsignedInteger
 ```
 
-## Extra Details
+## Deploy Details
 
 - moduleName = ValueTypes
 - deployerEndpoint = Initialize!()
 - deployerArgs = []
-- points = 10
-- level = Amateur
