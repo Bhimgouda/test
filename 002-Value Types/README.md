@@ -67,7 +67,7 @@ async (logicDriver, expect) => {
 
 Create a persistent state variable of type **I256** called **bit256Integer** and initialize it to **50**
 
-#### Test 4
+#### Test
 
 ```javascript
 async (logicDriver, expect) => {
@@ -82,7 +82,7 @@ async (logicDriver, expect) => {
 
 Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
 
-#### Test 5
+#### Test
 
 ```javascript
 async (logicDriver, expect) => {
@@ -97,7 +97,7 @@ async (logicDriver, expect) => {
 
 Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
 
-#### Test 6
+#### Test
 
 ```javascript
 async (logicDriver, expect) => {
