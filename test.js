@@ -2,6 +2,7 @@ const jsdom = require("jsdom");
 
 const axios = require("axios");
 const marked = require("marked");
+const { json } = require("express");
 
 let jsonData = {
   id: "",
@@ -10,9 +11,9 @@ let jsonData = {
   title: "",
   description: "",
   tasks: [],
-  startCode: "",
-  solutionCode: "",
-  logic: {},
+  start_code: "",
+  solution_code: "",
+  deploy_details: {},
 };
 
 const totalSections = {
@@ -25,13 +26,9 @@ const totalSections = {
 };
 
 const validateSection = (line) => {
-  if (!line.startsWith("## ")) return false;
+  if (!line.startsWith("#")) return false;
 
-  const section = line
-    .split("## ")[1]
-    .replaceAll(" ", "_")
-    .toLowerCase()
-    .trim();
+  const section = line.split("# ")[1].replaceAll(" ", "_").toLowerCase().trim();
   return totalSections[section] ? section : false;
 };
 
@@ -44,25 +41,41 @@ const test = async () => {
 
   let currentSection = "";
 
+  let taskNumber = undefined;
   let testNumber = 0;
   let codeStarted = false;
 
   const lines = data.split("\n");
   lines.forEach((line, index) => {
-    line = line.replace(/"/g, "'");
-
     if (index === 0 && line.startsWith("# ")) {
       return (jsonData.title = line.split("# ")[1].trim());
     }
 
+    line.replace(/"/g, "'");
     if (!currentSection && line.includes(":")) {
       let key = line.split(":")[0].slice(1).trim();
+      console.log(key, "key");
       let value = line.split(":")[1].trim();
       return (jsonData[key] = value);
     }
 
     const validSection = validateSection(line);
     if (validSection) return (currentSection = validSection);
+
+    if (currentSection === "deploy_details") {
+      if (line.startsWith("```")) {
+        return (codeStarted = !codeStarted ? true : false);
+      }
+      if (codeStarted) {
+        if (line === "{" || line === "}") return;
+
+        let key = JSON.parse(line.split(":")[0]);
+        let value = JSON.parse(line.split(":")[1].replace(",", ""));
+        return (jsonData.deploy_details[key] = value);
+      }
+    }
+
+    line = line.replace(/"/g, "'");
 
     if (currentSection === "description") {
       if (line.startsWith("```") && !codeStarted) {
@@ -76,21 +89,45 @@ const test = async () => {
       if (line === "codeStart" || line === "codeEnd") lineBreak = "";
       return (jsonData.description += line + lineBreak);
     }
-    // else if (line.startsWith("## Description")) {
-    //   currentSection = "description";
-    //
-    // } else if (line.startsWith("## Tasks")) {
-    //   currentSection = "tasks";
-    //   taskNumber = 0;
-    // } else if (line.startsWith("## Start Code")) {
-    //   currentSection = "startCode";
-    // } else if (line.startsWith("## Solution Code")) {
-    //   currentSection = "solutionCode";
-    // } else if (line.startsWith("## Tests")) {
-    //   currentSection = "tests";
-    //   taskNumber = 0;
-    // } else if (line.startsWith("## Extra Details")) {
-    //   currentSection = "extras";
+
+    if (currentSection === "start_code" || currentSection === "solution_code") {
+      if (line.startsWith("```")) {
+        return (codeStarted = !codeStarted ? true : false);
+      }
+      if (codeStarted) {
+        return (jsonData[currentSection] += line + "\n");
+      }
+    }
+
+    if (currentSection === "tasks") {
+      if (line.startsWith("#") && line.toLowerCase().includes("task")) {
+        taskNumber = parseInt(line.toLowerCase().split("task")[1]) - 1;
+        return (jsonData.tasks[taskNumber] = { test: "", description: "" });
+      }
+
+      if (taskNumber !== undefined) {
+        if (line.startsWith("```") && !codeStarted) {
+          codeStarted = true;
+          line = "codeStart";
+        } else if (line.startsWith("```") && codeStarted) {
+          codeStarted = false;
+          line = "codeEnd";
+        }
+        let lineBreak = codeStarted ? "line-break" : "\n";
+        if (line === "codeStart" || line === "codeEnd") lineBreak = "";
+        jsonData.tasks[taskNumber].description += line + lineBreak;
+      }
+    }
+    if (currentSection === "tests") {
+      if (line.startsWith("```")) {
+        if (codeStarted) testNumber += 1;
+        return (codeStarted = !codeStarted ? true : false);
+      }
+      if (codeStarted) {
+        return (jsonData.tasks[testNumber].test += line);
+      }
+    }
+
     // } else {
     //   if (currentSection === "tasks") {
     //     if (parseInt(line[0])) {
@@ -122,26 +159,36 @@ const test = async () => {
     //         jsonData["tasks"][taskNumber].test += line;
     //       }
     //     }
-    //   } else if (
-    //     currentSection === "startCode" ||
-    //     currentSection === "solutionCode"
-    //   ) {
-    //     if (jsonData[currentSection] === "" && !line.startsWith("coco")) return;
-    //     if (line.startsWith("```")) return;
-    //     jsonData[currentSection] += line + "\n";
-    //   } else if (currentSection === "extras") {
+    //   }  else if (currentSection === "extras") {
     //     const parts = line.split("=").map((part) => part.trim());
     //     jsonData[parts[0]] = parts[1];
     //   }
     // }
   });
+
   jsonData.description = marked
     .parse(jsonData.description)
     .replaceAll("\n", "")
-    .replace(/"/g, "'")
     .replaceAll("line-break", "\n")
     .replace("<p>codeStart", "<pre>")
     .replace("codeEnd</p>", "<pre>");
+
+  jsonData.tasks.forEach((task, i) => {
+    jsonData.tasks[i].description = marked
+      .parse(jsonData.tasks[i].description)
+      .replaceAll("\n", "")
+      .replaceAll("line-break", "\n")
+      .replace("<p>codeStart", "<pre>")
+      .replace("codeEnd</p>", "<pre>");
+  });
+
+  jsonData.start_code = jsonData.start_code
+    .replace(/^\n+/, "")
+    .replace(/\n+$/, "");
+
+  jsonData.solution_code = jsonData.solution_code
+    .replace(/^\n+/, "")
+    .replace(/\n+$/, "");
 
   console.log(JSON.stringify(jsonData));
 };

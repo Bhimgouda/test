@@ -21,8 +21,7 @@ Let's start with the persistent-state variables.
 
 Persistent-state variables are only declared inside **state persistent:**
 
-```
-
+```cocolang
 coco TokenLedger
 
 state persistent:
@@ -36,7 +35,6 @@ endpoint deployer Init!():
 
 endpoint invokable SetName!(name String):
     mutate name -> TokenLedger.State.name
-
 ```
 
 ## Tasks
@@ -45,13 +43,13 @@ endpoint invokable SetName!(name String):
 
 Write a mutating **endpoint invokable ResetNum!** which will reset the persistent state variable **num** to **0**.
 
-Note: This endpoint will affect the state of the logic/blockchain. Hence it is a mutating/write endpoint.
+**Note:** This endpoint will affect the state of the logic/blockchain. Hence it is a mutating/write endpoint.
 
 ### Task 2
 
 Write a non-mutating **endpoint invokable GetNumPlusTwo**. This function will return **num + 2** without updating the state variable num.
 
-Note: This endpoint will not affect the state of the logic/blockchain. Hence it is a non-mutating/read-only endpoint
+**Note:** This endpoint will not affect the state of the logic/blockchain. Hence it is a non-mutating/read-only endpoint
 
 ## Tests
 
@@ -112,7 +110,7 @@ endpoint invokable GetNumPlusOne()->(numPlusOne U64):
 // Write GetNumPlusTwo endpoint here
 ```
 
-### Solution Code
+## Solution Code
 
 ```cocolang
 coco StateVariables
