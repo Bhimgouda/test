@@ -22,6 +22,7 @@ Let's start with the persistent-state variables.
 Persistent-state variables are only declared inside **state persistent:**
 
 ```
+
 coco TokenLedger
 
 state persistent:
@@ -35,6 +36,7 @@ endpoint deployer Init!():
 
 endpoint invokable SetName!(name String):
     mutate name -> TokenLedger.State.name
+
 ```
 
 ## Tasks

@@ -45,7 +45,7 @@ const test = async () => {
   let currentSection = "";
 
   let testNumber = 0;
-  let codeStarted = true;
+  let codeStarted = false;
 
   const lines = data.split("\n");
   lines.forEach((line, index) => {
@@ -65,15 +65,16 @@ const test = async () => {
     if (validSection) return (currentSection = validSection);
 
     if (currentSection === "description") {
-      //   const newLines = lines.slice(index + 1);
-      //   for (let newLine of newLines) {
-      //     if (newLine.startsWith("#")) break;
-      //     description += newLine + "\n";
-      //   }
-      //   description = marked.parse(description).replaceAll("\n", "");
-      //   jsonData["description"] = description;
-
-      return (jsonData.description += line + "\n");
+      if (line.startsWith("```") && !codeStarted) {
+        codeStarted = true;
+        line = "codeStart";
+      } else if (line.startsWith("```") && codeStarted) {
+        codeStarted = false;
+        line = "codeEnd";
+      }
+      let lineBreak = codeStarted ? "line-break" : "\n";
+      if (line === "codeStart" || line === "codeEnd") lineBreak = "";
+      return (jsonData.description += line + lineBreak);
     }
     // else if (line.startsWith("## Description")) {
     //   currentSection = "description";
@@ -137,9 +138,12 @@ const test = async () => {
   jsonData.description = marked
     .parse(jsonData.description)
     .replaceAll("\n", "")
-    .replace(/"/g, "'");
+    .replace(/"/g, "'")
+    .replaceAll("line-break", "\n")
+    .replace("<p>codeStart", "<pre>")
+    .replace("codeEnd</p>", "<pre>");
 
-  console.log(jsonData);
+  console.log(JSON.stringify(jsonData));
 };
 
 test();
