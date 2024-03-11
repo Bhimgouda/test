@@ -1,5 +1,6 @@
 # Value Types
 
+- id = value-types
 - points = 10
 - level = Amateur
 
@@ -100,7 +101,7 @@ async (logicDriver, expect) => {
 
 ## Start Code
 
-```
+```cocolang
 coco ValueTypes
 
 state persistent:
@@ -114,7 +115,7 @@ endpoint deployer Initialize!():
 
 ## Solution Code
 
-```
+```cocolang
 coco ValueTypes
 
 state persistent:
@@ -140,6 +141,10 @@ endpoint deployer Initialize!():
 
 ## Deploy Details
 
-- moduleName = ValueTypes
-- deployerEndpoint = Initialize!()
-- deployerArgs = []
+```json
+{
+  "moduleName": "ValueTypes",
+  "deployerEndpoint": "Initialize!",
+  "deployerArgs": []
+}
+```

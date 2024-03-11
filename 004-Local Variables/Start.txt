@@ -5,11 +5,8 @@ func localVars():
     u = 1
     var Bool  = true
 
-// Local variables don't require datatype identifier
-// if A value is assigned while declaring 
-// eg: var u = 123
+// Local variables don't need a type if you assign a value during declaration.
+// Example: var u = 123
 
-// But require the datatype identifier when declared
-// without assigning a value
-// eg: var u U4
-// u = 121
+// But you must specify the type if no value is assigned during declaration.
+// Example: var u U4

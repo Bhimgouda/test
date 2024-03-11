@@ -1,5 +1,5 @@
 const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+
 const axios = require("axios");
 const marked = require("marked");
 
