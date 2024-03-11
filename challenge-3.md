@@ -8,10 +8,10 @@
 
 There are **4 types of variables** in coco-lang:
 
-1. persistent-state,
+1. persistent-state
 2. ephemeral-state
-3. local,
-4. global variables.
+3. local
+4. global variables
 
 Let's start with the persistent-state variables.
 
@@ -19,9 +19,9 @@ Let's start with the persistent-state variables.
 
 ### How do you declare a persistent state variable?
 
-Persistent-state variables are only declared inside **state persistent:** section
+Persistent-state variables are only declared inside **state persistent:**
 
-```cocolang
+```
 coco TokenLedger
 
 state persistent:
