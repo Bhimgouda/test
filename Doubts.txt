@@ -4,6 +4,8 @@ array (some error or gets passed)
 
 in solidity it passes if we explicitly don't add a require
 
+
+
 2. what happens in
     state persistent:
         items []String

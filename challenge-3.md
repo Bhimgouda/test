@@ -1,20 +1,25 @@
 # Persistent State Variables
 
-- id = persistent-state-variables
-- points = 10
-- level = Amateur
+- id: persistent-state-variables
+- points: 10
+- level: Amateur
 
 ## Description
 
-There are **4 types of variables** in coco-lang: persistent-state, ephemeral-state, local, and global variables.
+There are **4 types of variables** in coco-lang:
+
+1. persistent-state,
+2. ephemeral-state
+3. local,
+4. global variables.
 
 Let's start with the persistent-state variables.
 
-**Persistent state variables** are stored on the chain and are accessible by all. You can save some data into a persistent-state variable, come back a week later, and the data will still be there.
+**Persistent state variables** are stored on the blockchain and are accessible by all. You can save some data into a persistent-state variable, come back a week later, and the data will still be there.
 
 ### How do you declare a persistent state variable?
 
-Persistent-state variables are only declared inside state persistent:
+Persistent-state variables are only declared inside **state persistent:** section
 
 ```cocolang
 coco TokenLedger
@@ -34,11 +39,38 @@ endpoint invokable SetName!(name String):
 
 ## Tasks
 
-1. Write a mutating(write) **endpoint invokable resetNum!** which will reset the persistent state variable **num** to **0**.
+### Task 1
 
-2. Write a non-mutating(read) **endpoint invokable getNumPlusOne**. This function will return num + 1 without updating the state variable num.
+Write a mutating **endpoint invokable ResetNum!** which will reset the persistent state variable **num** to **0**.
+
+Note: This endpoint will affect the state of the logic/blockchain. Hence it is a mutating/write endpoint.
+
+### Task 2
+
+Write a non-mutating **endpoint invokable GetNumPlusTwo**. This function will return **num + 2** without updating the state variable num.
+
+Note: This endpoint will not affect the state of the logic/blockchain. Hence it is a non-mutating/read-only endpoint
 
 ## Tests
+
+```javascript
+async (logicDriver, expect) => {
+  const ix = await logicDriver.routines.ResetNum();
+  await ix.wait();
+
+  const num = await logicDriver.persistentState.get("num");
+  expect(num).to.be.equal(0);
+};
+```
+
+```javascript
+async (logicDriver, expect) => {
+  const num = await logicDriver.persistentState.get("num");
+
+  const { numPlusTwo } = await logicDriver.routines.GetNumPlusTwo();
+  expect(numPlusTwo).to.be.equal(num + 2);
+};
+```
 
 ## Start Code
 
@@ -71,12 +103,11 @@ endpoint invokable SetNum!(newNum U64):
 // non-mutating/read Endpoints
 ////////////////////
 
-// Non-mutating/Read-only Endpoints
-// It does not make any updates to the blockchain.
-endpoint invokable GetNum()->(theNum U64):
-    observe theNum <- StateVariables.State.num
+endpoint invokable GetNumPlusOne()->(numPlusOne U64):
+    observe num <- StateVariables.State.num:
+        yield numPlusOne num + 1
 
-// Write GetNumPlusOne endpoint here
+// Write GetNumPlusTwo endpoint here
 ```
 
 ### Solution Code
@@ -105,7 +136,7 @@ endpoint invokable SetNum!(newNum U64):
     mutate newNum -> StateVariables.State.num
 
 endpoint invokable ResetNum!():
-mutate 0 -> StateVariables.State.num
+    mutate 0 -> StateVariables.State.num
 
 /////////////////////
 // non-mutating/read Endpoints
@@ -113,12 +144,13 @@ mutate 0 -> StateVariables.State.num
 
 // Non-mutating/Read-only Endpoints
 // It does not make any updates to the blockchain.
-endpoint invokable GetNum()->(theNum U64):
-    observe theNum <- StateVariables.State.num
-
 endpoint invokable GetNumPlusOne()->(numPlusOne U64):
-observe num <- StateVariables.State.num:
-numPlusOne = num + 1
+    observe num <- StateVariables.State.num:
+        yield numPlusOne num + 1
+
+endpoint invokable GetNumPlusTwo()->(numPlusTwo U64):
+    observe num <- StateVariables.State.num:
+        yield numPlusTwo num + 2
 ```
 
 ## Deploy Details

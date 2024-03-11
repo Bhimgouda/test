@@ -1,12 +1,12 @@
 # Value Types
 
-- id = value-types
-- points = 10
-- level = Amateur
+- id: value-types
+- points: 10
+- level: Amateur
 
 ## Description
 
-Here are some **Primitive data types** available in cocolang.
+Here are some **Primitive Datatypes** available in cocolang.
 
 1. Bool
 2. String
@@ -17,7 +17,7 @@ Here are some **Primitive data types** available in cocolang.
 
 All the coco variables when declared with a particular type are initialized with **zero/default values**
 
-When they are used as function arguments or variable assignments, their values are not copied over to the new variable, unlike reference variables such as mappings and arrays that share a common memory address, allowing changes made to one variable to reflect in the other.
+When they are used as function arguments or variable assignments, their values are not copied over to the new variable, unlike reference datatypes (eg: mappings, arrays) that share a common memory address, allowing changes made to one variable to reflect in the other.
 
 **Note** - _You can't start a variable name with a number_
 
@@ -49,7 +49,7 @@ Create a persistent state variable of type **U256** called **Bit256UnsignedInteg
 
 ## Tests
 
-```javascript {#task1Test}
+```javascript
 async (logicDriver, expect) => {
   const justABoolean = await logicDriver.persistentState.get("justABoolean");
   expect(justABoolean).to.be.equal(true);
@@ -107,10 +107,12 @@ coco ValueTypes
 state persistent:
     justABytes Bytes
     justAnAddress Address
+    // Declare variables here
 
 endpoint deployer Initialize!():
     mutate 0x -> ValueTypes.State.justABytes
     mutate Address(Sender) -> ValueTypes.State.justAnAddress
+    // Initialize them here
 ```
 
 ## Solution Code

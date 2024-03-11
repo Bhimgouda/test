@@ -1,8 +1,8 @@
 # Hello World
 
-- name = hello-world
-- points = 10
-- level = Amateur
+- id: hello-world
+- points: 10
+- level: Amateur
 
 ## Description
 
@@ -16,7 +16,7 @@ Check the logic name is **HelloWorld**
 
 ### Task 2
 
-Create a **persistent state variable** called **greet** and then assign it an initial value of **"Hello World"**
+Create a persistent state variable called **greet** and then assign it an initial value of **"Hello World"**
 
 ## Tests
 
@@ -29,27 +29,28 @@ async (logicDriver, expect) => {
 
 ## Start Code
 
-```
-    coco HelloWorld
+```cocolang
+coco HelloWorld
 
-    state persistent:
-        myString String
-        // Write your code here
+state persistent:
+    myString String
+    // Create the variable here
 
-    endpoint deployer Initialize!():
-        mutate "My String" -> HelloWorld.State.myString
+endpoint deployer Initialize!():
+    mutate "My String" -> HelloWorld.State.myString
+    // and then mutate it to the desired value here
 ```
 
 ## Solution Code
 
-```
-    coco HelloWorld
+```cocolang
+coco HelloWorld
 
-    state persistent:
+state persistent:
     myString String
     greet String
 
-    endpoint deployer Initialize!():
+endpoint deployer Initialize!():
     mutate "My String" -> HelloWorld.State.myString
     mutate "Hello World" -> HelloWorld.State.greet
 ```
