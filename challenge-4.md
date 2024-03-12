@@ -57,34 +57,6 @@ func localVars():
 // Example: var u U4
 ```
 
-## Solution Code
-
-```cocolang
-coco LocalVariables
-
-state persistent:
-    random String
-
-endpoint deployer Init!():
-    pass
-
-func localVars():
-    var u U64
-    u = 1
-    var Bool  = true
-
-// Local variables don't need a type if you assign a value during declaration.
-// Example: var u = 123
-
-// But you must specify the type if no value is assigned during declaration.
-// Example: var u U4
-
-endpoint invokable Add()->(sum U64):
-    var num1 = 121
-    var num2 = 212
-    sum = num1 + num2
-```
-
 ## Deploy Details
 
 ```json

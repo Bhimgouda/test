@@ -65,37 +65,6 @@ endpoint invokable GetMyString()->(aString String):
     observe aString <- GlobalVariables.State.myString
 ```
 
-## Solution Code
-
-```cocolang
-coco GlobalVariables
-
-state persistent:
-    myString String
-
-endpoint deployer Init!():
-    pass
-
-func globalVars():
-    var logicAddress = Address(GlobalVariables)
-    // address of the logic
-
-    var sender = Address(Sender)
-    // address of the user that is calling
-
-    var timeStamp = Env.Timestamp()
-    // timestamp (in seconds) of current tesseract
-    // Not to confuse - This is how you get Current time
-
-endpoint invokable GetMyString()->(aString String):
-    // Even Logic's Module Name is a global variable
-    // from where we acces the persistent state variables
-    observe aString <- GlobalVariables.State.myString
-
-endpoint invokable GetSenderAddress()->(senderAddress Address):
-    senderAddress = Address(Sender)
-```
-
 ## Deploy Details
 
 ```json

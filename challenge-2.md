@@ -15,11 +15,11 @@ Here are some **Primitive Datatypes** available in cocolang.
 5. U64 and U256
 6. I64 and I256
 
-All the coco variables when declared with a particular type are initialized with **zero/default values**
+All the coco variables when declared with a particular type are initialized with their respective **zero/default values**.
 
-When they are used as function arguments or variable assignments, their values are not copied over to the new variable, unlike reference datatypes (eg: mappings, arrays) that share a common memory address, allowing changes made to one variable to reflect in the other.
+### Note
 
-**Note** - _You can't start a variable name with a number_
+_You can't start a variable name with a number_
 
 ## Tasks
 
@@ -113,32 +113,6 @@ endpoint deployer Initialize!():
     mutate 0x -> ValueTypes.State.justABytes
     mutate Address(Sender) -> ValueTypes.State.justAnAddress
     // Initialize them here
-```
-
-## Solution Code
-
-```cocolang
-coco ValueTypes
-
-state persistent:
-    justABytes Bytes
-    justAnAddress Address
-    justABoolean Bool
-    justAString String
-    bit64Integer I64
-    bit256Integer I256
-    bit64UnsignedInteger U64
-    bit256UnsignedInteger U256
-
-endpoint deployer Initialize!():
-    mutate 0x -> ValueTypes.State.justABytes
-    mutate Address(Sender) -> ValueTypes.State.justAnAddress
-    mutate true -> ValueTypes.State.justABoolean
-    mutate "I am a string" -> ValueTypes.State.justAString
-    mutate -20 -> ValueTypes.State.bit64Integer
-    mutate 50 -> ValueTypes.State.bit256Integer
-    mutate 20 -> ValueTypes.State.bit64UnsignedInteger
-    mutate 50 -> ValueTypes.State.bit256UnsignedInteger
 ```
 
 ## Deploy Details

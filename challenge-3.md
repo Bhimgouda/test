@@ -106,49 +106,6 @@ endpoint invokable GetNumPlusOne()->(numPlusOne U64):
 // Write GetNumPlusTwo endpoint here
 ```
 
-## Solution Code
-
-```cocolang
-coco StateVariables
-
-state persistent:
-    num U64
-
-/////////////////////
-// deployer Endpoints
-////////////////////
-
-endpoint deployer InitializeNum!():
-    var newNum = 21
-    mutate newNum -> StateVariables.State.num
-
-/////////////////////
-// mutating/write Endpoints
-////////////////////
-
-// Note: Mutating endpoints are denoted with "!" as a suffix.
-
-endpoint invokable SetNum!(newNum U64):
-    mutate newNum -> StateVariables.State.num
-
-endpoint invokable ResetNum!():
-    mutate 0 -> StateVariables.State.num
-
-/////////////////////
-// non-mutating/read Endpoints
-////////////////////
-
-// Non-mutating/Read-only Endpoints
-// It does not make any updates to the blockchain.
-endpoint invokable GetNumPlusOne()->(numPlusOne U64):
-    observe num <- StateVariables.State.num:
-        yield numPlusOne num + 1
-
-endpoint invokable GetNumPlusTwo()->(numPlusTwo U64):
-    observe num <- StateVariables.State.num:
-        yield numPlusTwo num + 2
-```
-
 ## Deploy Details
 
 ```json
