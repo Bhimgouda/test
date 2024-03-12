@@ -21,8 +21,8 @@ Create a **endpoint invokable Add** and declare 2 local variables with respectiv
 #### Example on how to return an output from an endpoint
 
 ```cocolang
-   endpoint invokable Test()->(returnVar String):
-   yield returnVar "Tested"
+endpoint invokable Test()->(returnVar String):
+    yield returnVar "Tested"
 ```
 
 ## Tests

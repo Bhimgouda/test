@@ -41,11 +41,11 @@ Create a persistent state variable of type **I256** called **bit256Integer** and
 
 ### Task 5
 
-Create a persistent state variable of type **U64** called **Bit64UnsignedInteger** and initialize it to **20**
+Create a persistent state variable of type **U64** called **bit64UnsignedInteger** and initialize it to **20**
 
 ### Task 6
 
-Create a persistent state variable of type **U256** called **Bit256UnsignedInteger** and initialize it to **50**
+Create a persistent state variable of type **U256** called **bit256UnsignedInteger** and initialize it to **50**
 
 ## Tests
 
