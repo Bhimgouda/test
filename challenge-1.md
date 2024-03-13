@@ -2,7 +2,8 @@
 
 - id: hello-world
 - points: 10
-- level: Amateur
+- level: rookie
+- category: app
 
 ## Description
 

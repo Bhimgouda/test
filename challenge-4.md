@@ -2,7 +2,8 @@
 
 - id: local-variables
 - points: 10
-- level: Amateur
+- level: rookie
+- category: variable
 
 ## Description
 

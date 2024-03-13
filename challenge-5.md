@@ -2,17 +2,17 @@
 
 - id: global-variables
 - points: 10
-- level: Amateur
+- level: rookie
+- category: variable
 
 ## Description
 
 We have 2 types of global variables in coco
 
 1. Participant Context variables
+
    - Sender
    - Logic (Module Name)
-
-**Note** - The coco module name is also a global variable - It can be used to access the state information of the logic module.
 
 2. Environment & Interaction Variables
    - Env.Timestamp
@@ -20,6 +20,8 @@ We have 2 types of global variables in coco
    - Ixn.Kind
    - Ixn.FuelLimit
    - Ixn.FuelPrice
+
+**Note** - The coco module name is also a global variable - It can be used to access the state information of the logic module.
 
 ## Tasks
 
