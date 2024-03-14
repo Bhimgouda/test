@@ -2,8 +2,7 @@
 
 - id: local-variables
 - points: 10
-- level: rookie
-- category: variable
+- level: Amateur
 
 ## Description
 
@@ -63,7 +62,7 @@ func localVars():
 ```json
 {
   "moduleName": "LocalVariables",
-  "deployerEndpoint": "Initialize!",
+  "deployerEndpoint": "Init!",
   "deployerArgs": []
 }
 ```

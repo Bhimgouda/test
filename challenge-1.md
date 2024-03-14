@@ -13,7 +13,7 @@ Time to say Hello Coco 👋
 
 ### Task 1
 
-Check if the logic name is **HelloWorld** and create a persistent state variable called **greet** and then assign it an initial value of **"Hello World"**
+Check if the logic name is **HelloWorld** and create a persistent state variable called **greet String** and then assign it an initial value of **"Hello World"**
 
 ## Tests
 

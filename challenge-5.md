@@ -14,8 +14,7 @@ We have 2 types of global variables in coco
    - Sender
    - Logic (Module Name)
 
-2. Environment & Interaction Variables
-
+2. Environment & Interaction Variable
    - Env.Timestamp
    - Env.ClusterId
    - Ixn.Kind
