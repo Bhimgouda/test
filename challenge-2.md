@@ -51,47 +51,43 @@ Create a persistent state variable of type **U256** called **bit256UnsignedInteg
 ## Tests
 
 ```javascript
-async (logicDriver, expect) => {
-  const justABoolean = await logicDriver.persistentState.get("justABoolean");
+async (logic, expect) => {
+  const justABoolean = await logic.getPersistent("greet");
   expect(justABoolean).to.be.equal(true);
 };
 ```
 
 ```javascript
-async (logicDriver, expect) => {
-  const justAString = await logicDriver.persistentState.get("justAString");
+async (logic, expect) => {
+  const justAString = await logic.getPersistent("justAString");
   expect(justAString).to.be.equal("I am a string");
 };
 ```
 
 ```javascript
-async (logicDriver, expect) => {
-  const bit64Integer = await logicDriver.persistentState.get("bit64Integer");
+async (logic, expect) => {
+  const bit64Integer = await logic.getPersistent("bit64Integer");
   expect(bit64Integer).to.be.equal(-20);
 };
 ```
 
 ```javascript
-async (logicDriver, expect) => {
-  const bit256Integer = await logicDriver.persistentState.get("bit256Integer");
+async (logic, expect) => {
+  const bit256Integer = await logic.getPersistent("bit256Integer");
   expect(bit256Integer).to.be.equal(50);
 };
 ```
 
 ```javascript
-async (logicDriver, expect) => {
-  const bit64UnsignedInteger = await logicDriver.persistentState.get(
-    "bit64UnsignedInteger"
-  );
+async (logic, expect) => {
+  const bit64UnsignedInteger = await logic.getPersistent("bit64UnsignedInteger");
   expect(bit64UnsignedInteger).to.be.equal(20);
 };
 ```
 
 ```javascript
-async (logicDriver, expect) => {
-  const bit256UnsignedInteger = await logicDriver.persistentState.get(
-    "bit256UnsignedInteger"
-  );
+async (logic, expect) => {
+  const bit256UnsignedInteger = await logic.getPersistent("bit256UnsignedInteger");
   expect(bit256UnsignedInteger).to.be.equal(50);
 };
 ```

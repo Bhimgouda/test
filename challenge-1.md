@@ -18,10 +18,8 @@ Check if the logic name is **HelloWorld** and create a persistent state variable
 ## Tests
 
 ```javascript
-async (logicDriver, expect) => {
-  const greet = await logicDriver.persistentState.get("greet");
-  expect(greet).to.be.equal("Hello World");
-};
+const greet = await logic.getPersistent("greet");
+expect(greet).to.be.equal("Hello World");
 ```
 
 ## Start Code
