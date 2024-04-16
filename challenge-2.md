@@ -16,7 +16,7 @@ Here are some **Primitive Datatypes** available in cocolang.
 5. U64 and U256
 6. I64 and I256
 
-All the coco variables when declared with a particular type are initialized with their respective **zero/default values**.
+All the coco variables are when declared with a particular type are initialized with their respective **zero/default values**.
 
 ### Note
 
